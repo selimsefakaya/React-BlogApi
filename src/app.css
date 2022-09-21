@@ -1,0 +1,28 @@
+.list .item {
+    display: flex !important
+}
+
+.menu .item {
+    width: auto !important;
+    flex-grow: 1 !important
+}
+
+.menu .item:hover {
+    background-color:black !important;
+    filter:brightness(150%) !important;
+}
+
+.menu .home {
+    background-color: black !important;
+    flex-grow: 10 !important;
+    filter:brightness(150%) !important;
+}
+
+.menu .home:hover {
+    background-color: rgb(117, 117, 117) !important;
+    filter:brightness(100%) !important;
+}
+
+.hidden {
+    display:none;
+}
