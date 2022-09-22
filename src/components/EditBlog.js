@@ -1,36 +1,44 @@
-import React, { useState } from "react";
-
-const initialBlog = {
-    title: "",
-    content: "",
-    name: "",
-    email: "",
-};
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const initialStatus = {
     class: "hidden",
     content: "",
 };
 
-const BlogForm = () => {
-    const [blogObject, setBlogObject] = useState(initialBlog);
+const EditBlog = () => {
     const [loading, setLoading] = useState(false);
+    const blogId = useParams().id;
+    const [details, setDetails] = useState({});
     const [status, setStatus] = useState(initialStatus);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        getBlog();
+    }, []);
+
+    async function getBlog() {
+        setLoading(true);
+        await fetch(`https://632566c59075b9cbee4a5ad1.mockapi.io/blogs/${blogId}`)
+            .then((res) => res.json())
+            .then((res) => setDetails(res))
+            .catch((err) => console.log(err));
+        setLoading(false);
+    }
 
     async function onSubmitForm(e) {
         e.preventDefault();
         setLoading(true);
         setStatus(initialStatus);
 
-        await fetch(`https://632566c59075b9cbee4a5ad1.mockapi.io/blogs/`, {
-            method: "POST",
+        await fetch(`https://632566c59075b9cbee4a5ad1.mockapi.io/blogs/${blogId}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json; charset=UTF-8",
             },
-            body: JSON.stringify(blogObject),
+            body: JSON.stringify(details),
         })
-            .then(setBlogObject(initialBlog))
-            .then(setStatus({ class: "ui success message", content: "Success!" }))
+            .then((res) => navigate(`/posts/${blogId}`))
             .catch((err) => {
                 setStatus({ class: "ui error message", content: "Error!" });
                 console.log(err);
@@ -39,7 +47,7 @@ const BlogForm = () => {
     }
 
     const onChangeBlog = (e) => {
-        setBlogObject({ ...blogObject, [e.target.name]: e.target.value });
+        setDetails({ ...details, [e.target.name]: e.target.value });
     };
 
     return (
@@ -48,8 +56,8 @@ const BlogForm = () => {
                 <div className="ui active centered inline loader"></div>
             ) : (
                 <form onSubmit={onSubmitForm}>
-                    <h2>Add Blog Form</h2>
-                    <div className={status.class}>{status.content}</div>
+                    <h2>Edit Blog</h2>
+                    {/* <div className={status.class}>{status.content}</div> */}
                     <div className="ui form" style={{ margin: "20px 0" }}>
                         <div className="field">
                             <label>Name</label>
@@ -57,9 +65,9 @@ const BlogForm = () => {
                                 type="text"
                                 name="name"
                                 placeholder="Name"
-                                value={blogObject.name}
-                                onChange={onChangeBlog}
+                                value={details.name}
                                 required
+                                disabled
                             />
                         </div>
                     </div>
@@ -71,9 +79,9 @@ const BlogForm = () => {
                                 type="email"
                                 name="email"
                                 placeholder="Email"
-                                value={blogObject.email}
-                                onChange={onChangeBlog}
+                                value={details.email}
                                 required
+                                disabled
                             />
                         </div>
                     </div>
@@ -85,7 +93,7 @@ const BlogForm = () => {
                                 type="text"
                                 name="title"
                                 placeholder="Title"
-                                value={blogObject.title}
+                                value={details.title}
                                 onChange={onChangeBlog}
                                 required
                             />
@@ -96,10 +104,9 @@ const BlogForm = () => {
                         <div className="field">
                             <label>Blog Content</label>
                             <textarea
-                                rows="3"
                                 name="content"
                                 placeholder="Write your blog."
-                                value={blogObject.content}
+                                value={details.content}
                                 onChange={onChangeBlog}
                                 required
                             ></textarea>
@@ -107,12 +114,13 @@ const BlogForm = () => {
                     </div>
 
                     <button className="ui primary button fluid" type="submit">
-                        Add Blog
+                        Update Blog
                     </button>
+                    <div className={status.class}>{status.content}</div>
                 </form>
             )}
         </div>
     );
 };
 
-export default BlogForm;
+export default EditBlog;

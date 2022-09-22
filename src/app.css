@@ -1,5 +1,5 @@
 .list .item {
-    display: flex !important
+    display: flex !important;
 }
 
 .menu .item {
@@ -8,21 +8,44 @@
 }
 
 .menu .item:hover {
-    background-color:black !important;
-    filter:brightness(150%) !important;
+    background-color: black !important;
+    filter: brightness(150%) !important;
 }
 
 .menu .home {
     background-color: black !important;
     flex-grow: 10 !important;
-    filter:brightness(150%) !important;
+    filter: brightness(150%) !important;
 }
 
 .menu .home:hover {
     background-color: rgb(117, 117, 117) !important;
-    filter:brightness(100%) !important;
+    filter: brightness(100%) !important;
 }
 
 .hidden {
-    display:none;
+    display: none;
+}
+
+.box-show {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.box-sure {
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius:15px;
 }

@@ -35,40 +35,38 @@ const CommentForm = ({ blogId, setComments, comments }) => {
 
     return (
         <div>
-            {
-                loading ? (
-                    <div className="ui active centered inline loader"></div>
-                ) : (
-                    <form className="ui form" onSubmit={handleCommentSubmit}>
-                        <h4 style={{ marginTop: "40px" }}>Share your comment</h4>
-                        <div
-                            className="ui mini icon input fluid"
-                            style={{ marginBottom: "5px" }}
-                        >
-                            <input
-                                type="text"
-                                placeholder="Name"
-                                name="name"
-                                onChange={handleOnChange}
-                                value={commentObject.name}
-                                required
-                            />
-                        </div>
-                        <textarea
-                            placeholder="Tell us more"
-                            rows="3"
-                            name="body"
+            {loading ? (
+                <div className="ui active centered inline loader"></div>
+            ) : (
+                <form className="ui form" onSubmit={handleCommentSubmit}>
+                    <h4 style={{ marginTop: "40px" }}>Share your comment</h4>
+                    <div
+                        className="ui mini icon input fluid"
+                        style={{ marginBottom: "5px" }}
+                    >
+                        <input
+                            type="text"
+                            placeholder="Name"
+                            name="name"
                             onChange={handleOnChange}
-                            value={commentObject.body}
-                            style={{ marginBottom: "5px" }}
+                            value={commentObject.name}
                             required
-                        ></textarea>
-                        <button className="ui fluid primary button" type="submit">
-                            Send
-                        </button>
-                    </form>
-                )
-            }
+                        />
+                    </div>
+                    <textarea
+                        placeholder="Tell us more"
+                        rows="3"
+                        name="body"
+                        onChange={handleOnChange}
+                        value={commentObject.body}
+                        style={{ marginBottom: "5px" }}
+                        required
+                    ></textarea>
+                    <button className="ui fluid primary button" type="submit">
+                        Send
+                    </button>
+                </form>
+            )}
         </div>
     );
 };
