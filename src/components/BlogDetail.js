@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Comments from "./Comments";
 import NotFound from "./NotFound";
 
@@ -9,8 +9,6 @@ const BlogDetail = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [boxClass, setBoxClass] = useState("hidden");
-    const loc = useLocation();
-    console.log(loc)
 
     useEffect(() => {
         getBlog();
