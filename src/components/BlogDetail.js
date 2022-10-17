@@ -28,8 +28,8 @@ const BlogDetail = () => {
         await fetch(`https://632566c59075b9cbee4a5ad1.mockapi.io/blogs/${blogId}`, {
             method: "DELETE",
         })
-            .then((res) => setLoading(false))
-            .then((res) => navigate("/"))
+            .then(() => setLoading(false))
+            .then(() => navigate("/"))
             .catch((err) => console.log(err));
     }
 

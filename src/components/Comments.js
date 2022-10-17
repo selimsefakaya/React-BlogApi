@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 
-const Comments = ({ blogId, loading, setLoading }) => {
+const Comments = ({ blogId }) => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {

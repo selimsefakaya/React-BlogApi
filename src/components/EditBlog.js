@@ -57,7 +57,6 @@ const EditBlog = () => {
             ) : (
                 <form onSubmit={onSubmitForm}>
                     <h2>Edit Blog</h2>
-                    {/* <div className={status.class}>{status.content}</div> */}
                     <div className="ui form" style={{ margin: "20px 0" }}>
                         <div className="field">
                             <label>Name</label>
